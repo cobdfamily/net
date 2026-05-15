@@ -1,3 +1,19 @@
+// Tuna/net cli -- TFCursor demo. Subscribes to every
+// bluefin event (Events.bus.on('all', ...)), boots the
+// UI manager, then implements a 4-direction tree-walk
+// cursor over the active app's accessibility tree
+// (e=up, x=down, d=right, s=left; q=quit).
+//
+// Skip-singleton-chains: moveDown/Left/Right/Up walks
+// past elements with no siblings -- "single-child"
+// containers are noise to a screen-reader user; they
+// don't carry decision points. Hitting an actual
+// boundary (no parent / no sibling) emits a beep via
+// ScreenReader.setOutput('beep').
+//
+// Demo-grade tooling: raw stdin in raw mode, no
+// terminal-handling library.
+
 import { Elements, Events, UI, ScreenReader } from '@cobd/bluefin';
 
 
